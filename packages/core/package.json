@@ -1,0 +1,33 @@
+{
+  "name": "@sealjs/core-runtime",
+  "version": "0.0.0",
+  "description": "",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": "^18.0.0 || >=20.0.0"
+  },
+  "scripts": {
+    "dev": "unbuild --stub && tsx ../../scripts/stub.ts",
+    "build": "unbuild",
+    "build-bundle": "rollup --config rollup.config.ts --configPlugin typescript",
+    "build-types": "run-s build-types-temp build-types-roll",
+    "build-types-temp": "tsc --emitDeclarationOnly --outDir temp -p src",
+    "build-types-roll": "api-extractor run && rimraf temp"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
