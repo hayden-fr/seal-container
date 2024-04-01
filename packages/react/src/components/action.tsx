@@ -1,10 +1,8 @@
-import { EventSchema } from '@sealjs/core-runtime'
 import { useContext, useEffect } from 'react'
-import { actionContext } from './context'
-import type { LifeCycleAction } from './types'
+import { actionContext } from '../hooks'
 
 export function SealAction() {
-  const action = useContext<EventSchema<LifeCycleAction>>(actionContext)
+  const action = useContext(actionContext)
 
   useEffect(() => {
     const executed = { current: false }

@@ -1,4 +1,4 @@
-export { SealContainer } from './container'
-export { useSealAction } from './context'
-export type { SealNode } from './types'
-export { createSealContext, defineSealSetup } from './utils'
+export { createSealContext, defineSealSetup } from '@sealjs/core-runtime'
+export type { ContextSchema, SealNode } from '@sealjs/core-runtime'
+export { SealContainer } from './components/container'
+export { useSealAction } from './hooks'

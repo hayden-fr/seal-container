@@ -1,4 +1,12 @@
-import { EventSchema } from '@sealjs/core-runtime'
+import {
+  createSealContext,
+  deepClear,
+  migrateSchema,
+  type ContainerAction,
+  type LifeCycleAction,
+  type SealNode,
+  type SetupSchema,
+} from '@sealjs/core-runtime'
 import {
   Fragment,
   useEffect,
@@ -8,31 +16,13 @@ import {
   type ComponentType,
   type ReactNode,
 } from 'react'
+import { ContextProvider, MetaProvider, useLatest } from '../hooks'
 import { SealAction } from './action'
-import { MetaContext, SchemaContext } from './context'
-import { useLatest } from './hooks'
-import type {
-  ActionSetup,
-  ContainerAction,
-  LifeCycleAction,
-  SealNode,
-} from './types'
-import { createSealContext, deepClear, migrateSchema } from './utils'
-
-class VirtualSchema extends EventSchema {
-  get(name: string): EventSchema {
-    const schema = this.component.get(name)
-    if (schema) return schema
-    const component = new EventSchema()
-    this.component.set(name, component)
-    return component
-  }
-}
 
 export interface SealContainerProps {
   components: Record<string, ComponentType<any>>
   items: SealNode[] | (() => SealNode[] | Promise<SealNode[]>)
-  setup?: ActionSetup<any, any>
+  setup?: SetupSchema<any, any>
   children?: ReactNode
 }
 
@@ -50,28 +40,29 @@ export function SealContainer(props: SealContainerProps) {
       const Component = props.components[type] ?? Fragment
       const children = renderItems(item.children ?? [])
       return (
-        <MetaContext key={item.key} value={{ ...item.meta, key: item.key }}>
+        <MetaProvider key={item.key} value={{ ...item.meta, key: item.key }}>
           <Component {...item.props}>{children}</Component>
-        </MetaContext>
+        </MetaProvider>
       )
     })
   }
 
   const preload = useRef(false)
-  const preloadContext = useMemo(() => new VirtualSchema(), [])
+  const preloadContext = useMemo(() => {
+    return createSealContext({ automatic: true })
+  }, [])
 
   /** 全局上下文 */
   const context = useMemo(() => {
     const context = createSealContext<LifeCycleAction & ContainerAction>()
-    const proxyCtx = new Proxy(context, {
-      get(target, p: string, receiver) {
+    return new Proxy(context, {
+      get(target, p, receiver) {
         if (preload.current) {
           return Reflect.get(preloadContext, p, receiver)
         }
         return Reflect.get(target, p, receiver)
       },
     })
-    return proxyCtx
   }, [])
 
   /**
@@ -144,8 +135,8 @@ export function SealContainer(props: SealContainerProps) {
       // 迁移
       migrateSchema(context, preloadContext)
       deepClear(preloadContext)
-      setAction(<SealAction></SealAction>)
       migrated.current = true
+      setAction(<SealAction></SealAction>)
     }
     return () => {}
   }, [ready.current])
@@ -165,9 +156,9 @@ export function SealContainer(props: SealContainerProps) {
   }, [props.setup])
 
   return (
-    <SchemaContext value={context}>
+    <ContextProvider value={context}>
       {action}
       {rendered}
-    </SchemaContext>
+    </ContextProvider>
   )
 }
