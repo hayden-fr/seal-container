@@ -1,8 +1,8 @@
-import { useContext, useEffect } from 'react'
-import { actionContext } from '../hooks'
+import { useEffect } from 'react'
+import { useActionContext } from '../hooks'
 
 export function SealAction() {
-  const action = useContext(actionContext)
+  const action = useActionContext()
 
   useEffect(() => {
     const executed = { current: false }

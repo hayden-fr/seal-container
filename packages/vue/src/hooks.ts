@@ -7,18 +7,51 @@ import {
   SetupSchema,
   createSealContext,
 } from '@sealjs/core-runtime'
-import { inject, onBeforeUnmount, onMounted, ref } from 'vue'
+import {
+  PropType,
+  defineComponent,
+  inject,
+  onBeforeUnmount,
+  onMounted,
+  provide,
+  ref,
+} from 'vue'
 
-export const sealActionProvider = 'sealActionProvider'
+const actionContext = 'sealActionProvider'
+export const ContextProvider = defineComponent({
+  name: 'ContextProvider',
+  props: { value: { type: Object as PropType<ContextSchema>, require: true } },
+  setup(props, { slots }) {
+    provide(actionContext, props.value)
+    return () => slots.default?.() ?? null
+  },
+})
+export const useActionContext = () => {
+  return inject<ContextSchema<LifeCycleAction>>(
+    'sealActionProvider',
+    createSealContext(),
+  )
+}
 
-export const sealMetaProvider = 'sealMetaProvider'
+const metaContext = 'sealMetaProvider'
+export const MetaProvider = defineComponent({
+  name: 'MetaProvider',
+  props: { value: { type: Object, require: true } },
+  setup(props, { slots }) {
+    provide(metaContext, props.value)
+    return () => slots.default?.() ?? null
+  },
+})
+export const useMetaContext = () => {
+  return inject<Record<string, any>>(metaContext, {})
+}
 
 export function useSealAction<
   Action extends ActionSchema = Record<string, any>,
   Component extends ComponentSchema = Record<string, any>,
 >(setup?: SetupSchema<Action, Component>) {
-  const parentAction = inject<ContextSchema>(sealActionProvider)
-  const meta = inject<Record<string, any>>(sealMetaProvider, {})
+  const parentAction = useActionContext()
+  const meta = useMetaContext()
 
   const action = createSealContext<Action & LifeCycleAction, Component>()
 
@@ -53,7 +86,7 @@ export function useSealAction<
       externalAction.value[key] = current.filter((fn) => !fn.builtIn)
     }
     // 从父级上下文中卸载，避免重复加载报错
-    parentAction?.unset(meta.key)
+    parentAction.unset(meta.key)
     // 移除所有监听事件
     store.clear()
   })

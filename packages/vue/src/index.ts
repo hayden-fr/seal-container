@@ -1,4 +1,4 @@
 export { createSealContext, defineSealSetup } from '@sealjs/core-runtime'
 export type { ContextSchema, SealNode } from '@sealjs/core-runtime'
-export { default as SealContainer } from './components/container.vue'
+export { SealContainer } from './components/container'
 export { useSealAction } from './hooks'

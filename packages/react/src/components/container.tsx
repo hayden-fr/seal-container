@@ -9,6 +9,7 @@ import {
 } from '@sealjs/core-runtime'
 import {
   Fragment,
+  FunctionComponent,
   useEffect,
   useMemo,
   useRef,
@@ -26,7 +27,9 @@ export interface SealContainerProps {
   children?: ReactNode
 }
 
-export function SealContainer(props: SealContainerProps) {
+export const SealContainer: FunctionComponent<SealContainerProps> = (
+  props: SealContainerProps,
+) => {
   const [action, setAction] = useState<ReactNode>(null)
   const [rendered, setRendered] = useState<ReactNode>(null)
   const ready = useLatest(Boolean(rendered))

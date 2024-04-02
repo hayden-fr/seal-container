@@ -8,21 +8,24 @@ import {
 } from '@sealjs/core-runtime'
 import { createContext, useContext, useEffect, useMemo, useRef } from 'react'
 
-export const actionContext = createContext(createSealContext<LifeCycleAction>())
-
+const actionContext = createContext(createSealContext<LifeCycleAction>())
 export const ContextProvider = actionContext.Provider
+export const useActionContext = () => {
+  return useContext(actionContext)
+}
 
-export const metaContext = createContext<Record<string, any>>({})
-
+const metaContext = createContext<Record<string, any>>({})
 export const MetaProvider = metaContext.Provider
+export const useMetaContext = () => {
+  return useContext(metaContext)
+}
 
 export function useSealAction<
   Action extends ActionSchema = Record<string, any>,
   Component extends ComponentSchema = Record<string, any>,
 >(setup?: SetupSchema<Action, Component>) {
-  const parentAction = useContext(actionContext)
-
-  const meta = useContext(metaContext)
+  const parentAction = useActionContext()
+  const meta = useMetaContext()
 
   const action = useMemo(() => {
     return createSealContext<Action & LifeCycleAction, Component>()
