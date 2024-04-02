@@ -1,7 +1,7 @@
 {
-  "name": "@sealjs/react-render",
-  "version": "0.0.0",
-  "description": "",
+  "name": "seal-react-render",
+  "version": "0.0.1",
+  "description": "React implementation of SealJS",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -13,19 +13,22 @@
       "types": "./dist/index.d.ts"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "engines": {
-    "node": "^18.0.0"
+    "node": "^18.0.0 || >=20.0.0"
   },
   "scripts": {
     "dev": "unbuild --stub && tsx ../../scripts/stub.ts",
-    "build": "unbuild"
+    "build": "unbuild",
+    "prepublishOnly": "pnpm run build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@sealjs/core-runtime": "workspace:^"
+    "seal-core-runtime": "workspace:^"
   },
   "devDependencies": {
     "react": "^18.2.0"

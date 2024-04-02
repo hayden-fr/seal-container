@@ -1,3 +1,4 @@
+import { createContext, useContext, useEffect, useMemo, useRef } from 'react'
 import {
   ActionExecuteFn,
   ActionSchema,
@@ -5,8 +6,7 @@ import {
   LifeCycleAction,
   SetupSchema,
   createSealContext,
-} from '@sealjs/core-runtime'
-import { createContext, useContext, useEffect, useMemo, useRef } from 'react'
+} from 'seal-core-runtime'
 
 const actionContext = createContext(createSealContext<LifeCycleAction>())
 export const ContextProvider = actionContext.Provider

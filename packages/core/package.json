@@ -1,7 +1,7 @@
 {
-  "name": "@sealjs/core-runtime",
-  "version": "0.0.0",
-  "description": "",
+  "name": "seal-core-runtime",
+  "version": "0.0.1",
+  "description": "Core runtime for SealJS",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -22,10 +22,7 @@
   "scripts": {
     "dev": "unbuild --stub && tsx ../../scripts/stub.ts",
     "build": "unbuild",
-    "build-bundle": "rollup --config rollup.config.ts --configPlugin typescript",
-    "build-types": "run-s build-types-temp build-types-roll",
-    "build-types-temp": "tsc --emitDeclarationOnly --outDir temp -p src",
-    "build-types-roll": "api-extractor run && rimraf temp"
+    "prepublishOnly": "pnpm run build"
   },
   "keywords": [],
   "author": "",

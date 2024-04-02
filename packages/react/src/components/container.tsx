@@ -1,13 +1,4 @@
 import {
-  createSealContext,
-  deepClear,
-  migrateSchema,
-  type ContainerAction,
-  type LifeCycleAction,
-  type SealNode,
-  type SetupSchema,
-} from '@sealjs/core-runtime'
-import {
   Fragment,
   FunctionComponent,
   useEffect,
@@ -17,6 +8,15 @@ import {
   type ComponentType,
   type ReactNode,
 } from 'react'
+import {
+  createSealContext,
+  deepClear,
+  migrateSchema,
+  type ContainerAction,
+  type LifeCycleAction,
+  type SealNode,
+  type SetupSchema,
+} from 'seal-core-runtime'
 import { ContextProvider, MetaProvider, useLatest } from '../hooks'
 import { SealAction } from './action'
 
