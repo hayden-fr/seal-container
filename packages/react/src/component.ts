@@ -1,6 +1,7 @@
 import {
   Fragment,
   FunctionComponent,
+  createElement,
   useEffect,
   useMemo,
   useRef,
@@ -17,8 +18,35 @@ import {
   type SealNode,
   type SetupSchema,
 } from 'seal-core-runtime'
-import { ContextProvider, MetaProvider, useLatest } from '../hooks'
-import { SealAction } from './action'
+import {
+  ContextProvider,
+  MetaProvider,
+  useActionContext,
+  useLatest,
+} from './hooks'
+
+const SealAction: FunctionComponent = () => {
+  const action = useActionContext()
+
+  useEffect(() => {
+    const executed = { current: false }
+
+    const callback = async () => {
+      await action.exec('mounted')
+      executed.current = true
+    }
+
+    const timer = setTimeout(callback, 0)
+    return () => {
+      clearTimeout(timer)
+      if (executed.current) {
+        action.exec('unmounted')
+      }
+    }
+  }, [])
+
+  return null
+}
 
 export interface SealContainerProps {
   components: Record<string, ComponentType<any>>
@@ -42,11 +70,16 @@ export const SealContainer: FunctionComponent<SealContainerProps> = (
       const { type } = item
       const Component = props.components[type] ?? Fragment
       const children = renderItems(item.children ?? [])
-      return (
-        <MetaProvider key={item.key} value={{ ...item.meta, key: item.key }}>
-          <Component {...item.props}>{children}</Component>
-        </MetaProvider>
+      return createElement(
+        MetaProvider,
+        { value: { ...item.meta, key: item.key } },
+        createElement(Component, { ...item.props, children }, children),
       )
+      // return (
+      //   <MetaProvider key={item.key} value={{ ...item.meta, key: item.key }}>
+      //     <Component {...item.props}>{children}</Component>
+      //   </MetaProvider>
+      // )
     })
   }
 
@@ -139,7 +172,7 @@ export const SealContainer: FunctionComponent<SealContainerProps> = (
       migrateSchema(context, preloadContext)
       deepClear(preloadContext)
       migrated.current = true
-      setAction(<SealAction></SealAction>)
+      setAction(createElement(SealAction))
     }
     return () => {}
   }, [ready.current])
@@ -158,10 +191,5 @@ export const SealContainer: FunctionComponent<SealContainerProps> = (
     }
   }, [props.setup])
 
-  return (
-    <ContextProvider value={context}>
-      {action}
-      {rendered}
-    </ContextProvider>
-  )
+  return createElement(ContextProvider, { value: context }, [action, rendered])
 }

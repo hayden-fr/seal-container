@@ -12,13 +12,30 @@ import {
   h,
   nextTick,
   onMounted,
+  onUnmounted,
   PropType,
   ref,
   VNode,
   watch,
 } from 'vue'
-import { ContextProvider, MetaProvider } from '../hooks'
-import { SealAction } from './action'
+import { ContextProvider, MetaProvider, useActionContext } from './hooks'
+
+const SealAction = defineComponent({
+  name: 'SealAction',
+  setup() {
+    const action = useActionContext()
+
+    onMounted(() => {
+      action.exec('mounted')
+    })
+
+    onUnmounted(() => {
+      action.exec('unmounted')
+    })
+
+    return () => null
+  },
+})
 
 type SealNodeFunction = () => SealNode[] | Promise<SealNode[]>
 
