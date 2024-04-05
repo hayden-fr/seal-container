@@ -72,14 +72,9 @@ export const SealContainer: FunctionComponent<SealContainerProps> = (
       const children = renderItems(item.children ?? [])
       return createElement(
         MetaProvider,
-        { value: { ...item.meta, key: item.key } },
+        { key: item.key, value: { ...item.meta, key: item.key } },
         createElement(Component, { ...item.props, children }, children),
       )
-      // return (
-      //   <MetaProvider key={item.key} value={{ ...item.meta, key: item.key }}>
-      //     <Component {...item.props}>{children}</Component>
-      //   </MetaProvider>
-      // )
     })
   }
 
@@ -172,7 +167,7 @@ export const SealContainer: FunctionComponent<SealContainerProps> = (
       migrateSchema(context, preloadContext)
       deepClear(preloadContext)
       migrated.current = true
-      setAction(createElement(SealAction))
+      setAction(createElement(SealAction, { key: 'seal-action' }))
     }
     return () => {}
   }, [ready.current])
