@@ -1,11 +1,13 @@
 {
   "name": "seal-vue-render",
-  "version": "0.0.1",
-  "description": "Vue implementation of SealJS",
+  "version": "0.0.2",
+  "description": "Vue implementation of Seal Container",
+  "keywords": [
+    "low-code",
+    "vue"
+  ],
+  "author": "hayden",
   "type": "module",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
@@ -13,20 +15,17 @@
       "types": "./dist/index.d.ts"
     }
   },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
-  "engines": {
-    "node": "^18.0.0 || >=20.0.0"
-  },
   "scripts": {
+    "build": "unbuild && tsx ../../scripts/build.ts",
     "dev": "unbuild --stub && tsx ../../scripts/stub.ts",
-    "build": "unbuild",
     "prepublishOnly": "pnpm run build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "seal-core-runtime": "workspace:^"
   },
@@ -35,5 +34,8 @@
   },
   "peerDependencies": {
     "vue": "^3.4.21"
+  },
+  "engines": {
+    "node": "^18.0.0 || >=20.0.0"
   }
 }

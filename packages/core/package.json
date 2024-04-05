@@ -1,11 +1,15 @@
 {
   "name": "seal-core-runtime",
-  "version": "0.0.1",
-  "description": "Core runtime for SealJS",
+  "version": "0.0.2",
+  "description": "Core runtime for Seal Container",
+  "keywords": [
+    "typescript",
+    "low-code",
+    "react",
+    "vue"
+  ],
+  "author": "hayden",
   "type": "module",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
@@ -13,18 +17,18 @@
       "types": "./dist/index.d.ts"
     }
   },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
-  "engines": {
-    "node": "^18.0.0 || >=20.0.0"
-  },
   "scripts": {
+    "build": "unbuild && tsx ../../scripts/build.ts",
     "dev": "unbuild --stub && tsx ../../scripts/stub.ts",
-    "build": "unbuild",
     "prepublishOnly": "pnpm run build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "engines": {
+    "node": "^18.0.0 || >=20.0.0"
+  }
 }
