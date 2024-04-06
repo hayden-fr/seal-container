@@ -1,5 +1,5 @@
 {
-  "name": "seal-core-runtime",
+  "name": "@seal-container/core-runtime",
   "version": "0.0.2",
   "description": "Core runtime for Seal Container",
   "keywords": [

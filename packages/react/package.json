@@ -1,5 +1,5 @@
 {
-  "name": "seal-react-render",
+  "name": "@seal-container/react-render",
   "version": "0.0.2",
   "description": "React implementation of Seal Container",
   "keywords": [
@@ -27,7 +27,7 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "seal-core-runtime": "workspace:^"
+    "@seal-container/core-runtime": "workspace:^"
   },
   "devDependencies": {
     "react": "^18.2.0"

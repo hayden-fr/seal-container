@@ -1,5 +1,5 @@
 {
-  "name": "seal",
+  "name": "seal-container",
   "version": "0.0.2",
   "private": true,
   "description": "Simple and efficient low-code implementation.",
@@ -51,9 +51,9 @@
   },
   "pnpm": {
     "overrides": {
-      "seal-core-runtime": "workspace:*",
-      "seal-react-render": "workspace:*",
-      "seal-vue-render": "workspace:*"
+      "@seal-container/core-runtime": "workspace:*",
+      "@seal-container/react-render": "workspace:*",
+      "@seal-container/vue-render": "workspace:*"
     }
   }
 }

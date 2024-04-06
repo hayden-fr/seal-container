@@ -6,7 +6,7 @@ import {
   LifeCycleAction,
   SetupSchema,
   createSealContext,
-} from 'seal-core-runtime'
+} from '@seal-container/core-runtime'
 import {
   PropType,
   defineComponent,

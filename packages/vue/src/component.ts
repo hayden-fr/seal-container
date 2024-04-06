@@ -4,7 +4,7 @@ import {
   migrateSchema,
   SealNode,
   SetupSchema,
-} from 'seal-core-runtime'
+} from '@seal-container/core-runtime'
 import {
   Component,
   defineComponent,
