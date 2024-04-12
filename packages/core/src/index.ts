@@ -2,37 +2,45 @@ import { Context, ContextConfig } from './context'
 import type {
   ActionExecuteFn,
   ActionSchema,
+  AnyObject,
   ComponentSchema,
   ContainerAction,
   ContextSchema,
+  GetContextSchema,
   LifeCycleAction,
+  SealComponent,
   SealNode,
-  SetupSchema,
+  SetupCallback,
 } from './types'
+
+type LifeCycle<T> = T & ContainerAction & LifeCycleAction
 
 export function defineSealSetup<
   Action extends ActionSchema | unknown,
-  Component extends ComponentSchema,
->(setup: SetupSchema<Action & ContainerAction, Component>) {
+  Component extends ComponentSchema | unknown,
+>(setup: SetupCallback<LifeCycle<Action>, Component>) {
   return setup
 }
 
 export function createSealContext<
-  Action extends ActionSchema = Record<string, any>,
-  Component extends ComponentSchema = Record<string, any>,
->(opts?: ContextConfig) {
-  return new Context(opts) as ContextSchema<Action, Component>
+  Action extends ActionSchema = AnyObject,
+  Component extends ComponentSchema = AnyObject,
+>(opts?: ContextConfig): ContextSchema<Action, Component> {
+  return new Context<Action, Component>(opts)
 }
 
 export type {
   ActionExecuteFn,
   ActionSchema,
+  AnyObject,
   ComponentSchema,
   ContainerAction,
   ContextSchema,
+  GetContextSchema,
   LifeCycleAction,
+  SealComponent,
   SealNode,
-  SetupSchema,
+  SetupCallback,
 }
 
 export function migrateSchema(target: ContextSchema, source: ContextSchema) {

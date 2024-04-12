@@ -1,11 +1,9 @@
-export interface ContextSchema<
-  Action extends ActionSchema = Record<string, any>,
-  Component extends ComponentSchema = Record<string, any>,
-> {
+export type AnyObject = Record<string, any>
+
+export interface ContextSchema<Action extends ActionSchema = AnyObject, Component extends ComponentSchema = AnyObject> {
   set(name: string, context: ContextSchema<any, any>, skipWarn?: boolean): void
   unset<K extends keyof Component>(name: K): void
   get<K extends keyof Component>(name: K): Component[K]
-  get<T extends ContextSchema>(name: string): T
 
   on<K extends keyof Action>(name: K, exec: Async<Action[K]>): void
   rm<K extends keyof Action>(name: K, exec: Async<Action[K]>): void
@@ -38,17 +36,21 @@ export type ContainerAction = {
   template_ready: (template: SealNode[]) => SealNode[] | undefined | void
 }
 
-export type NonAsyncVoidFunction = (...args: any[]) => void
-
-export type SetupSchema<
+export type SetupCallback<
   Action extends ActionSchema | unknown = unknown,
-  Component extends ComponentSchema = Record<string, never>,
-> = NonAsyncVoidFunction & ((ctx: ContextSchema<Action & LifeCycleAction, Component>) => void)
+  Component extends ComponentSchema | unknown = unknown,
+> = (ctx: ContextSchema<NonNullable<Action>, NonNullable<Component>>) => void
 
 export interface SealNode<T extends keyof any = string> {
   key: string
   type: T
   props?: Record<string, any>
   meta?: Record<string, any>
-  children?: SealNode[]
+  children?: SealNode<T>[]
 }
+
+export type SealComponent<T, C = ContextSchema> = T & {
+  ctx?: C
+}
+
+export type GetContextSchema<T> = T extends SealComponent<AnyObject, infer C> ? C : never

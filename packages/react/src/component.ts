@@ -2,20 +2,22 @@ import {
   createSealContext,
   deepClear,
   migrateSchema,
+  type AnyObject,
   type ContainerAction,
+  type ContextSchema,
   type LifeCycleAction,
   type SealNode,
-  type SetupSchema,
+  type SetupCallback,
 } from '@seal-container/core-runtime'
 import {
   Fragment,
-  FunctionComponent,
   createElement,
   useEffect,
   useMemo,
   useRef,
   useState,
   type ComponentType,
+  type FunctionComponent,
   type ReactNode,
 } from 'react'
 import {
@@ -26,7 +28,7 @@ import {
 } from './hooks'
 
 const SealAction: FunctionComponent = () => {
-  const action = useActionContext()
+  const action = useActionContext<LifeCycleAction>()
 
   useEffect(() => {
     const executed = { current: false }
@@ -48,11 +50,12 @@ const SealAction: FunctionComponent = () => {
   return null
 }
 
+type SealNodeFunction = () => SealNode[] | Promise<SealNode[]>
+
 export interface SealContainerProps {
   components: Record<string, ComponentType<any>>
-  items: SealNode[] | (() => SealNode[] | Promise<SealNode[]>)
-  setup?: SetupSchema<any, any>
-  children?: ReactNode
+  items: SealNode[] | SealNodeFunction
+  setup?: SetupCallback<any, any>
 }
 
 export const SealContainer: FunctionComponent<SealContainerProps> = (
@@ -188,3 +191,10 @@ export const SealContainer: FunctionComponent<SealContainerProps> = (
 
   return createElement(ContextProvider, { value: context }, [action, rendered])
 }
+
+export interface SealFunctionComponent<P = AnyObject, C = ContextSchema>
+  extends FunctionComponent<P> {
+  ctx?: C
+}
+
+export type SFC<P = AnyObject, C = ContextSchema> = SealFunctionComponent<P, C>

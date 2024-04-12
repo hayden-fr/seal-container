@@ -1,38 +1,43 @@
 import {
-  ActionExecuteFn,
-  ActionSchema,
-  ComponentSchema,
-  LifeCycleAction,
-  SetupSchema,
   createSealContext,
+  type ActionExecuteFn,
+  type ActionSchema,
+  type AnyObject,
+  type ComponentSchema,
+  type ContextSchema,
+  type SetupCallback,
 } from '@seal-container/core-runtime'
 import { createContext, useContext, useEffect, useMemo, useRef } from 'react'
 
-const actionContext = createContext(createSealContext<LifeCycleAction>())
-export const ContextProvider = actionContext.Provider
-export const useActionContext = () => {
-  return useContext(actionContext)
+const SealContext = createContext(createSealContext())
+export const ContextProvider = SealContext.Provider
+export const useActionContext = <
+  Action extends ActionSchema | unknown = unknown,
+>() => {
+  return useContext<ContextSchema<NonNullable<Action>>>(SealContext)
 }
 
-const metaContext = createContext<Record<string, any>>({})
-export const MetaProvider = metaContext.Provider
+const MetaContext = createContext<AnyObject>({})
+export const MetaProvider = MetaContext.Provider
 export const useMetaContext = () => {
-  return useContext(metaContext)
+  return useContext(MetaContext)
 }
 
 export function useSealAction<
-  Action extends ActionSchema = Record<string, any>,
-  Component extends ComponentSchema = Record<string, any>,
->(setup?: SetupSchema<Action, Component>) {
+  Action extends ActionSchema | unknown = unknown,
+  Component extends ComponentSchema | unknown = unknown,
+>(
+  setup?: SetupCallback<Action, Component>,
+): ContextSchema<NonNullable<Action>, NonNullable<Component>> {
   const parentAction = useActionContext()
   const meta = useMetaContext()
 
   const action = useMemo(() => {
-    return createSealContext<Action & LifeCycleAction, Component>()
+    return createSealContext<any, any>()
   }, [])
 
-  // 外部监听事件缓存，组件卸载重新加载后，还原外部监听事件
-  const externalAction = useRef<Record<string, any[]>>({})
+  /** 外部监听事件缓存，组件卸载重新加载后，还原外部监听事件 */
+  const externalAction = useRef<Record<string, ActionExecuteFn[]>>({})
 
   useEffect(() => {
     const store = (action as any).action as Map<string, ActionExecuteFn[]>

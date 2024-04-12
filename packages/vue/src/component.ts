@@ -2,28 +2,29 @@ import {
   createSealContext,
   deepClear,
   migrateSchema,
-  SealNode,
-  SetupSchema,
+  type LifeCycleAction,
+  type SealNode,
+  type SetupCallback,
 } from '@seal-container/core-runtime'
 import {
-  Component,
-  defineComponent,
   Fragment,
+  defineComponent,
   h,
   nextTick,
   onMounted,
   onUnmounted,
-  PropType,
   ref,
-  VNode,
   watch,
+  type Component,
+  type PropType,
+  type VNode,
 } from 'vue'
 import { ContextProvider, MetaProvider, useActionContext } from './hooks'
 
 const SealAction = defineComponent({
   name: 'SealAction',
   setup() {
-    const action = useActionContext()
+    const action = useActionContext<LifeCycleAction>()
 
     onMounted(() => {
       action.exec('mounted')
@@ -39,38 +40,32 @@ const SealAction = defineComponent({
 
 type SealNodeFunction = () => SealNode[] | Promise<SealNode[]>
 
-interface Props {
+interface SealContainerProps {
   components: Record<string, Component<any>>
   items: SealNode[] | SealNodeFunction
-  setup?: SetupSchema<any, any>
+  setup?: SetupCallback<any, any>
 }
 
 export const SealContainer = defineComponent({
   name: 'SealContainer',
   props: {
     components: {
-      type: Object as PropType<Props['components']>,
+      type: Object as PropType<SealContainerProps['components']>,
       required: true,
     },
     items: {
       type: [Array, Function] as PropType<SealNode[] | SealNodeFunction>,
       required: true,
     },
-    setup: Function as PropType<Props['setup']>,
+    setup: Function as PropType<SealContainerProps['setup']>,
   },
   setup(props) {
-    const preload = ref(false)
-    const preloadContext = createSealContext({ automatic: true })
-    const originalContext = createSealContext()
-    const context = new Proxy(originalContext, {
-      get(target, p, receiver) {
-        if (preload.value) {
-          return Reflect.get(preloadContext, p, receiver)
-        }
-        return Reflect.get(target, p, receiver)
-      },
-    })
+    const action = ref<VNode>()
+    const rendered = ref<VNode[]>()
 
+    /**
+     * 模板渲染方法
+     */
     const renderItems = (items: SealNode[]): VNode[] => {
       return items.map((item) => {
         const { type } = item
@@ -89,8 +84,19 @@ export const SealContainer = defineComponent({
       })
     }
 
-    const action = ref<VNode>()
-    const rendered = ref<VNode[]>()
+    const preload = ref(false)
+    const preloadContext = createSealContext({ automatic: true })
+    const originalContext = createSealContext()
+
+    /** 全局上下文 */
+    const context = new Proxy(originalContext, {
+      get(target, p, receiver) {
+        if (preload.value) {
+          return Reflect.get(preloadContext, p, receiver)
+        }
+        return Reflect.get(target, p, receiver)
+      },
+    })
 
     onMounted(() => {
       preload.value = true

@@ -1,62 +1,66 @@
 import {
-  ActionExecuteFn,
-  ActionSchema,
-  ComponentSchema,
-  ContextSchema,
-  LifeCycleAction,
-  SetupSchema,
   createSealContext,
+  type ActionExecuteFn,
+  type ActionSchema,
+  type AnyObject,
+  type ComponentSchema,
+  type ContextSchema,
+  type SetupCallback,
 } from '@seal-container/core-runtime'
 import {
-  PropType,
   defineComponent,
   inject,
   onBeforeUnmount,
   onMounted,
   provide,
   ref,
+  type PropType,
 } from 'vue'
 
-const actionContext = 'sealActionProvider'
+const SealContext = 'SealContext'
 export const ContextProvider = defineComponent({
   name: 'ContextProvider',
   props: { value: { type: Object as PropType<ContextSchema>, require: true } },
   setup(props, { slots }) {
-    provide(actionContext, props.value)
+    provide(SealContext, props.value)
     return () => slots.default?.() ?? null
   },
 })
-export const useActionContext = () => {
-  return inject<ContextSchema<LifeCycleAction>>(
-    'sealActionProvider',
+export const useActionContext = <
+  Action extends ActionSchema | unknown = unknown,
+>() => {
+  return inject<ContextSchema<NonNullable<Action>>>(
+    SealContext,
     createSealContext(),
   )
 }
 
-const metaContext = 'sealMetaProvider'
+const MetaContext = 'SealMetaContext'
 export const MetaProvider = defineComponent({
   name: 'MetaProvider',
   props: { value: { type: Object, require: true } },
   setup(props, { slots }) {
-    provide(metaContext, props.value)
+    provide(MetaContext, props.value)
     return () => slots.default?.() ?? null
   },
 })
 export const useMetaContext = () => {
-  return inject<Record<string, any>>(metaContext, {})
+  return inject<AnyObject>(MetaContext, {})
 }
 
 export function useSealAction<
-  Action extends ActionSchema = Record<string, any>,
-  Component extends ComponentSchema = Record<string, any>,
->(setup?: SetupSchema<Action, Component>) {
+  Action extends ActionSchema | unknown = unknown,
+  Component extends ComponentSchema | unknown = unknown,
+>(
+  setup?: SetupCallback<Action, Component>,
+): ContextSchema<NonNullable<Action>, NonNullable<Component>> {
   const parentAction = useActionContext()
   const meta = useMetaContext()
 
-  const action = createSealContext<Action & LifeCycleAction, Component>()
+  const action = createSealContext<any, any>()
 
-  // 外部监听事件缓存，组件卸载重新加载后，还原外部监听事件
-  const externalAction = ref<Record<string, any[]>>({})
+  /** 外部监听事件缓存，组件卸载重新加载后，还原外部监听事件 */
+  const externalAction = ref<Record<string, ActionExecuteFn[]>>({})
 
   const store = (action as any).action as Map<string, ActionExecuteFn[]>
 
