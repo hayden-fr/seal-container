@@ -5,6 +5,7 @@ export {
 export type {
   ContextSchema,
   GetContextSchema,
+  ParentComponent,
   SealComponent,
   SealNode,
 } from '@seal-container/core-runtime'

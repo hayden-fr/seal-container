@@ -8,6 +8,7 @@ import type {
   ContextSchema,
   GetContextSchema,
   LifeCycleAction,
+  ParentComponent,
   SealComponent,
   SealNode,
   SetupCallback,
@@ -38,6 +39,7 @@ export type {
   ContextSchema,
   GetContextSchema,
   LifeCycleAction,
+  ParentComponent,
   SealComponent,
   SealNode,
   SetupCallback,
@@ -87,6 +89,8 @@ export function deepClear(schema: ContextSchema) {
   // 深度清理所有子组件
   const component = (schema as any).component as ComponentStore
   for (const key of component.keys()) {
+    // 忽略 parent，否则会引起死循环
+    if ('parent' === key) continue
     deepClear(component.get(key)!)
   }
 }

@@ -83,12 +83,14 @@ export const SealContainer: FunctionComponent<SealContainerProps> = (
 
   const preload = useRef(false)
   const preloadContext = useMemo(() => {
-    return createSealContext({ automatic: true })
+    return createSealContext({ automatic: true, name: 'preload-global' })
   }, [])
 
   /** 全局上下文 */
   const context = useMemo(() => {
-    const context = createSealContext<LifeCycleAction & ContainerAction>()
+    const context = createSealContext<LifeCycleAction & ContainerAction>({
+      name: 'global',
+    })
     return new Proxy(context, {
       get(target, p, receiver) {
         if (preload.current) {

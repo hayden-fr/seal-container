@@ -7,6 +7,7 @@ import type {
 } from './types'
 
 export interface ContextConfig {
+  name?: string
   automatic?: boolean
 }
 
@@ -15,6 +16,8 @@ export class Context<
   Component extends ComponentSchema = Record<string, any>,
 > implements ContextSchema<Action, Component>
 {
+  name: string
+
   protected action: Map<keyof Action, Async<Action[keyof Action]>[]>
 
   protected component: Map<keyof Component, Component[keyof Component]>
@@ -25,6 +28,7 @@ export class Context<
     this.action = new Map()
     this.component = new Map()
     this.config = config ?? {}
+    this.name = config?.name ?? Math.random().toString(36).slice(2)
   }
 
   set(

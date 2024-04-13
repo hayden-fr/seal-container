@@ -33,7 +33,7 @@ export function useSealAction<
   const meta = useMetaContext()
 
   const action = useMemo(() => {
-    return createSealContext<any, any>()
+    return createSealContext<any, any>({ name: meta.key })
   }, [])
 
   /** 外部监听事件缓存，组件卸载重新加载后，还原外部监听事件 */
@@ -58,6 +58,7 @@ export function useSealAction<
     }
     // 挂载到父级上下文中
     parentAction.set(meta.key, action)
+    action.set('parent', parentAction)
 
     return () => {
       // 卸载组件时，缓存监听事件，当组件重新加载时自动加载监听事件
@@ -67,6 +68,7 @@ export function useSealAction<
       }
       // 从父级上下文中卸载，避免重复加载报错
       parentAction.unset(meta.key)
+      action.unset('parent')
       // 移除所有监听事件
       store.clear()
     }

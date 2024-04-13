@@ -1,4 +1,5 @@
 import {
+  ContainerAction,
   createSealContext,
   deepClear,
   migrateSchema,
@@ -85,8 +86,13 @@ export const SealContainer = defineComponent({
     }
 
     const preload = ref(false)
-    const preloadContext = createSealContext({ automatic: true })
-    const originalContext = createSealContext()
+    const preloadContext = createSealContext({
+      automatic: true,
+      name: 'preload-global',
+    })
+    const originalContext = createSealContext<
+      LifeCycleAction & ContainerAction
+    >({ name: 'global' })
 
     /** 全局上下文 */
     const context = new Proxy(originalContext, {

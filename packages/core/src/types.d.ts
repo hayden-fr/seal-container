@@ -1,6 +1,8 @@
 export type AnyObject = Record<string, any>
 
 export interface ContextSchema<Action extends ActionSchema = AnyObject, Component extends ComponentSchema = AnyObject> {
+  name: string
+
   set(name: string, context: ContextSchema<any, any>, skipWarn?: boolean): void
   unset<K extends keyof Component>(name: K): void
   get<K extends keyof Component>(name: K): Component[K]
@@ -34,6 +36,10 @@ export type LifeCycleAction = {
 
 export type ContainerAction = {
   template_ready: (template: SealNode[]) => SealNode[] | undefined | void
+}
+
+export type ParentComponent = {
+  parent: ContextSchema
 }
 
 export type SetupCallback<
