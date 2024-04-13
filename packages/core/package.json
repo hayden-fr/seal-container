@@ -1,6 +1,6 @@
 {
   "name": "@seal-container/core-runtime",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Core runtime for Seal Container",
   "keywords": [
     "typescript",

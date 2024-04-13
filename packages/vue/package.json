@@ -1,6 +1,6 @@
 {
   "name": "@seal-container/vue-render",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Vue implementation of Seal Container",
   "keywords": [
     "low-code",
