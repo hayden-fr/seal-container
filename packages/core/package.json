@@ -26,9 +26,13 @@
   "scripts": {
     "build": "unbuild && tsx ../../scripts/build.ts",
     "dev": "unbuild --stub && tsx ../../scripts/stub.ts",
-    "prepublishOnly": "pnpm run build"
+    "prepublishOnly": "pnpm run build",
+    "test": "vitest --coverage"
   },
   "engines": {
     "node": "^18.0.0 || >=20.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   }
 }

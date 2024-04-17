@@ -50,11 +50,17 @@ const SealAction: FunctionComponent = () => {
   return null
 }
 
-type SealNodeFunction = () => SealNode[] | Promise<SealNode[]>
+type SealNodeFunction<ComponentCollection> = () =>
+  | SealNode<keyof ComponentCollection>[]
+  | Promise<SealNode<keyof ComponentCollection>[]>
 
-export interface SealContainerProps {
-  components: Record<string, ComponentType<any>>
-  items: SealNode[] | SealNodeFunction
+export interface SealContainerProps<
+  ComponentCollection extends Record<string, ComponentType<any>> = AnyObject,
+> {
+  components?: ComponentCollection
+  items?:
+    | SealNode<keyof ComponentCollection>[]
+    | SealNodeFunction<ComponentCollection>
   setup?: SetupCallback<any, any>
 }
 
@@ -66,17 +72,17 @@ export const SealContainer: FunctionComponent<SealContainerProps> = (
   const ready = useLatest(Boolean(rendered))
 
   /**
-   * 模板渲染方法
+   * The main method for rendering element nodes.
    */
-  const renderItems = (items: SealNode[]): ReactNode => {
+  const renderItems = (items: SealNode[]): ReactNode[] => {
     return items.map((item) => {
       const { type } = item
-      const Component = props.components[type] ?? Fragment
+      const Component = props.components?.[type] ?? Fragment
       const children = renderItems(item.children ?? [])
       return createElement(
         MetaProvider,
         { key: item.key, value: { ...item.meta, key: item.key } },
-        createElement(Component, { ...item.props, children }, children),
+        createElement(Component, { ...item.props }, children),
       )
     })
   }
@@ -86,7 +92,7 @@ export const SealContainer: FunctionComponent<SealContainerProps> = (
     return createSealContext({ automatic: true, name: 'preload-global' })
   }, [])
 
-  /** 全局上下文 */
+  /** Global context */
   const context = useMemo(() => {
     const context = createSealContext<LifeCycleAction & ContainerAction>({
       name: 'global',
@@ -148,7 +154,7 @@ export const SealContainer: FunctionComponent<SealContainerProps> = (
         const itemsPromise =
           typeof props.items === 'function'
             ? props.items()
-            : Promise.resolve(props.items)
+            : Promise.resolve(props.items ?? [])
 
         Promise.resolve(itemsPromise).then(resolve)
       })
