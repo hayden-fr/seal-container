@@ -1,4 +1,9 @@
-const message: Record<string, Record<string, string>> = {
+interface LocalMessage {
+  hasBeenRegistered: string
+  notBeenRegistered: string
+}
+
+const message: Record<string, LocalMessage> = {
   en: {
     hasBeenRegistered:
       'Instance "${0}" has been registered, and the previous instance will be covered.',
@@ -12,28 +17,17 @@ const message: Record<string, Record<string, string>> = {
 
 const defaultLanguage = navigator.language.split('-')[0]
 
-const currentLanguage = {
+export const config = {
   locale: defaultLanguage,
-  message: message[defaultLanguage] ?? message.en,
 }
 
 type ValueType = string | number
 
-const castObject = (val: Record<string, any> | any[]) => {
-  if (Array.isArray(val)) {
-    return Object.fromEntries(val.entries())
-  }
-  return val
-}
-
-export function t(
-  key: string,
-  variables?: Record<string, ValueType> | ValueType[],
-) {
-  let template = currentLanguage.message[key] ?? key
-  const object = castObject(variables ?? {})
-  for (const key in object) {
-    template = template.replace(`\${${key}}`, object[key])
+export function t(key: keyof LocalMessage, variables: ValueType[] = []) {
+  const currentMessage = message[config.locale] ?? message.en
+  let template = currentMessage[key]
+  for (const index of variables.keys()) {
+    template = template.replace(`\${${index}}`, variables[index].toString())
   }
   return template
 }

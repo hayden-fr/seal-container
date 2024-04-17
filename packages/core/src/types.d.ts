@@ -47,12 +47,12 @@ export type SetupCallback<
   Component extends ComponentSchema | unknown = unknown,
 > = (ctx: ContextSchema<NonNullable<Action>, NonNullable<Component>>) => void
 
-export interface SealNode<T extends keyof any = string> {
+export interface SealNode<T extends keyof any = string, E = never> {
   key: string
   type: T
   props?: Record<string, any>
   meta?: Record<string, any>
-  children?: SealNode<T>[]
+  children?: (SealNode<T, E> | E)[]
 }
 
 export type SealComponent<T, C = ContextSchema> = T & {

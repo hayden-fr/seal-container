@@ -54,12 +54,13 @@ export class Context<
     const schema = this.component.get(name)
     if (schema) return schema
 
-    const component = new Context() as any
     if (this.config.automatic) {
+      const component = new Context({ automatic: true }) as any
       this.component.set(name, component)
       return component
     }
 
+    const component = new Context() as any
     const message = t('notBeenRegistered', [name.toString()])
     const error = new Error(message)
     console.warn(error)
@@ -73,9 +74,11 @@ export class Context<
   }
 
   rm<K extends keyof Action>(name: K, exec: Async<Action[K]>): void {
-    const queue = this.action.get(name) ?? []
-    queue.splice(queue.indexOf(exec), 1)
-    this.action.set(name, queue)
+    const queue = this.action.get(name)
+    if (queue) {
+      queue.splice(queue.indexOf(exec), 1)
+      this.action.set(name, queue)
+    }
   }
 
   async exec<K extends keyof Action>(
