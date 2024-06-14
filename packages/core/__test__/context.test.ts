@@ -1,4 +1,4 @@
-import { Context } from '../context'
+import { Context } from '../src/context'
 
 describe('Register child schema', () => {
   const context = new Context({ name: 'root' })

@@ -1,4 +1,4 @@
-import { config, t } from '../i18n'
+import { config, t } from '../src/i18n'
 
 describe('i18n', () => {
   const originalLocal = config.locale

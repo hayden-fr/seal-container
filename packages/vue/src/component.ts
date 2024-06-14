@@ -41,31 +41,27 @@ const SealAction = defineComponent({
 
 type SealNodeFunction = () => SealNode[] | Promise<SealNode[]>
 
-interface SealContainerProps {
-  components: Record<string, Component<any>>
-  items: SealNode[] | SealNodeFunction
-  setup?: SetupCallback<any, any>
-}
-
 export const SealContainer = defineComponent({
   name: 'SealContainer',
   props: {
     components: {
-      type: Object as PropType<SealContainerProps['components']>,
-      required: true,
+      type: Object as PropType<Record<string, Component<any>>>,
+      default: () => ({}),
     },
     items: {
       type: [Array, Function] as PropType<SealNode[] | SealNodeFunction>,
-      required: true,
+      default: () => [],
     },
-    setup: Function as PropType<SealContainerProps['setup']>,
+    setup: {
+      type: Function as PropType<SetupCallback<any, any>>,
+    },
   },
   setup(props) {
     const action = ref<VNode>()
     const rendered = ref<VNode[]>()
 
     /**
-     * 模板渲染方法
+     * The main method for rendering element nodes.
      */
     const renderItems = (items: SealNode[]): VNode[] => {
       return items.map((item) => {
@@ -94,7 +90,7 @@ export const SealContainer = defineComponent({
       LifeCycleAction & ContainerAction
     >({ name: 'global' })
 
-    /** 全局上下文 */
+    /** Global context */
     const context = new Proxy(originalContext, {
       get(target, p, receiver) {
         if (preload.value) {

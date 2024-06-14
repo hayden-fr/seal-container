@@ -3,8 +3,8 @@ import {
   deepClear,
   defineSealSetup,
   migrateSchema,
-} from '../index'
-import type { ActionExecuteFn } from '../types'
+} from '../src'
+import type { ActionExecuteFn } from '../src/types'
 
 describe('Define setup fn', () => {
   test('should define setup fn', () => {
