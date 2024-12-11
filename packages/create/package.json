@@ -1,0 +1,31 @@
+{
+  "name": "create-seal-container",
+  "version": "0.0.2",
+  "keywords": [
+    "low-code",
+    "seal-container",
+    "react",
+    "vue"
+  ],
+  "author": "hayden",
+  "type": "module",
+  "bin": {
+    "create-seal-container": "index.js"
+  },
+  "files": [
+    "index.js",
+    "template-*",
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild && tsx ../../scripts/build.ts",
+    "dev": "unbuild --stub && tsx ../../scripts/stub.ts",
+    "prepublishOnly": "pnpm run build"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^9.0.7",
+    "@types/prompts": "^2.4.9",
+    "inquirer": "^9.2.17",
+    "prompts": "^2.4.2"
+  }
+}
