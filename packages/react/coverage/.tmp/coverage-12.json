@@ -1,0 +1,463 @@
+{
+  "result": [
+    {
+      "scriptId": "1012",
+      "url": "file:///home/hayden/code/hayden/seal/packages/react/src/__tests__/container.test.tsx",
+      "functions": [
+        {
+          "functionName": "",
+          "ranges": [{ "startOffset": 0, "endOffset": 4328, "count": 1 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "",
+          "ranges": [{ "startOffset": 13, "endOffset": 4328, "count": 1 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "",
+          "ranges": [{ "startOffset": 1037, "endOffset": 1770, "count": 1 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "",
+          "ranges": [{ "startOffset": 1056, "endOffset": 1766, "count": 1 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "",
+          "ranges": [{ "startOffset": 1529, "endOffset": 1682, "count": 2 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "",
+          "ranges": [{ "startOffset": 1582, "endOffset": 1668, "count": 0 }],
+          "isBlockCoverage": false
+        }
+      ]
+    },
+    {
+      "scriptId": "1013",
+      "url": "file:///home/hayden/code/hayden/seal/packages/core/dist/index.mjs",
+      "functions": [
+        {
+          "functionName": "",
+          "ranges": [{ "startOffset": 0, "endOffset": 700, "count": 1 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "",
+          "ranges": [{ "startOffset": 13, "endOffset": 700, "count": 1 }],
+          "isBlockCoverage": true
+        }
+      ]
+    },
+    {
+      "scriptId": "1014",
+      "url": "file:///home/hayden/code/hayden/seal/packages/core/src/index.ts",
+      "functions": [
+        {
+          "functionName": "",
+          "ranges": [{ "startOffset": 0, "endOffset": 7460, "count": 1 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "",
+          "ranges": [{ "startOffset": 13, "endOffset": 7460, "count": 1 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "defineSealSetup",
+          "ranges": [{ "startOffset": 340, "endOffset": 391, "count": 1 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "get",
+          "ranges": [{ "startOffset": 495, "endOffset": 526, "count": 1 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "createSealContext",
+          "ranges": [{ "startOffset": 530, "endOffset": 616, "count": 5 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "get",
+          "ranges": [{ "startOffset": 722, "endOffset": 755, "count": 5 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "migrateSchema",
+          "ranges": [{ "startOffset": 759, "endOffset": 1459, "count": 0 }],
+          "isBlockCoverage": false
+        },
+        {
+          "functionName": "get",
+          "ranges": [{ "startOffset": 1561, "endOffset": 1590, "count": 0 }],
+          "isBlockCoverage": false
+        },
+        {
+          "functionName": "deepClear",
+          "ranges": [
+            { "startOffset": 1594, "endOffset": 2058, "count": 4 },
+            { "startOffset": 1688, "endOffset": 1897, "count": 2 },
+            { "startOffset": 1723, "endOffset": 1728, "count": 0 },
+            { "startOffset": 1848, "endOffset": 1893, "count": 0 },
+            { "startOffset": 1974, "endOffset": 2056, "count": 2 },
+            { "startOffset": 2008, "endOffset": 2017, "count": 0 }
+          ],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "",
+          "ranges": [{ "startOffset": 1764, "endOffset": 1782, "count": 2 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "get",
+          "ranges": [{ "startOffset": 2156, "endOffset": 2181, "count": 2 }],
+          "isBlockCoverage": true
+        }
+      ]
+    },
+    {
+      "scriptId": "1015",
+      "url": "file:///home/hayden/code/hayden/seal/packages/core/src/context.ts",
+      "functions": [
+        {
+          "functionName": "",
+          "ranges": [{ "startOffset": 0, "endOffset": 7665, "count": 1 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "",
+          "ranges": [{ "startOffset": 13, "endOffset": 7665, "count": 1 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "<instance_members_initializer>",
+          "ranges": [{ "startOffset": 331, "endOffset": 1895, "count": 6 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "Context",
+          "ranges": [
+            { "startOffset": 390, "endOffset": 609, "count": 6 },
+            { "startOffset": 530, "endOffset": 535, "count": 1 },
+            { "startOffset": 559, "endOffset": 565, "count": 5 },
+            { "startOffset": 566, "endOffset": 604, "count": 2 }
+          ],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "set",
+          "ranges": [{ "startOffset": 612, "endOffset": 883, "count": 0 }],
+          "isBlockCoverage": false
+        },
+        {
+          "functionName": "unset",
+          "ranges": [{ "startOffset": 886, "endOffset": 936, "count": 0 }],
+          "isBlockCoverage": false
+        },
+        {
+          "functionName": "get",
+          "ranges": [
+            { "startOffset": 939, "endOffset": 1410, "count": 2 },
+            { "startOffset": 1018, "endOffset": 1199, "count": 1 },
+            { "startOffset": 1199, "endOffset": 1409, "count": 0 }
+          ],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "on",
+          "ranges": [{ "startOffset": 1413, "endOffset": 1536, "count": 2 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "rm",
+          "ranges": [{ "startOffset": 1539, "endOffset": 1703, "count": 0 }],
+          "isBlockCoverage": false
+        },
+        {
+          "functionName": "exec",
+          "ranges": [{ "startOffset": 1706, "endOffset": 1893, "count": 0 }],
+          "isBlockCoverage": false
+        },
+        {
+          "functionName": "get",
+          "ranges": [{ "startOffset": 1991, "endOffset": 2014, "count": 5 }],
+          "isBlockCoverage": true
+        }
+      ]
+    },
+    {
+      "scriptId": "1016",
+      "url": "file:///home/hayden/code/hayden/seal/packages/core/src/i18n.ts",
+      "functions": [
+        {
+          "functionName": "",
+          "ranges": [{ "startOffset": 0, "endOffset": 3350, "count": 1 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "",
+          "ranges": [{ "startOffset": 13, "endOffset": 3350, "count": 1 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "get",
+          "ranges": [{ "startOffset": 691, "endOffset": 713, "count": 0 }],
+          "isBlockCoverage": false
+        },
+        {
+          "functionName": "t",
+          "ranges": [{ "startOffset": 717, "endOffset": 996, "count": 0 }],
+          "isBlockCoverage": false
+        },
+        {
+          "functionName": "get",
+          "ranges": [{ "startOffset": 1086, "endOffset": 1103, "count": 0 }],
+          "isBlockCoverage": false
+        }
+      ]
+    },
+    {
+      "scriptId": "1293",
+      "url": "file:///home/hayden/code/hayden/seal/packages/react/src/component.ts",
+      "functions": [
+        {
+          "functionName": "",
+          "ranges": [{ "startOffset": 0, "endOffset": 15690, "count": 1 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "",
+          "ranges": [{ "startOffset": 13, "endOffset": 15690, "count": 1 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "SealAction",
+          "ranges": [{ "startOffset": 802, "endOffset": 1255, "count": 0 }],
+          "isBlockCoverage": false
+        },
+        {
+          "functionName": "SealContainer",
+          "ranges": [{ "startOffset": 1279, "endOffset": 4403, "count": 2 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "renderItems",
+          "ranges": [{ "startOffset": 1522, "endOffset": 2001, "count": 0 }],
+          "isBlockCoverage": false
+        },
+        {
+          "functionName": "",
+          "ranges": [{ "startOffset": 2113, "endOffset": 2221, "count": 2 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "",
+          "ranges": [{ "startOffset": 2276, "endOffset": 2610, "count": 2 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "get",
+          "ranges": [
+            { "startOffset": 2415, "endOffset": 2598, "count": 10 },
+            { "startOffset": 2541, "endOffset": 2597, "count": 0 }
+          ],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "",
+          "ranges": [
+            { "startOffset": 2651, "endOffset": 3592, "count": 2 },
+            { "startOffset": 2682, "endOffset": 2719, "count": 0 }
+          ],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "preload.current",
+          "ranges": [{ "startOffset": 2697, "endOffset": 2712, "count": 0 }],
+          "isBlockCoverage": false
+        },
+        {
+          "functionName": "templateReady",
+          "ranges": [
+            { "startOffset": 2840, "endOffset": 3109, "count": 2 },
+            { "startOffset": 2902, "endOffset": 2977, "count": 0 },
+            { "startOffset": 2979, "endOffset": 3035, "count": 0 },
+            { "startOffset": 3036, "endOffset": 3041, "count": 0 }
+          ],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "fetchTemplate",
+          "ranges": [{ "startOffset": 3137, "endOffset": 3444, "count": 2 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "",
+          "ranges": [
+            { "startOffset": 3176, "endOffset": 3436, "count": 2 },
+            { "startOffset": 3226, "endOffset": 3264, "count": 0 },
+            { "startOffset": 3328, "endOffset": 3343, "count": 0 }
+          ],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "",
+          "ranges": [{ "startOffset": 3498, "endOffset": 3587, "count": 2 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "",
+          "ranges": [
+            { "startOffset": 3689, "endOffset": 4022, "count": 2 },
+            { "startOffset": 3719, "endOffset": 3739, "count": 0 },
+            { "startOffset": 3741, "endOffset": 3992, "count": 0 }
+          ],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "",
+          "ranges": [{ "startOffset": 4004, "endOffset": 4017, "count": 2 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "",
+          "ranges": [
+            { "startOffset": 4076, "endOffset": 4259, "count": 2 },
+            { "startOffset": 4107, "endOffset": 4144, "count": 0 }
+          ],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "",
+          "ranges": [
+            { "startOffset": 4156, "endOffset": 4254, "count": 2 },
+            { "startOffset": 4189, "endOffset": 4248, "count": 0 }
+          ],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "get",
+          "ranges": [{ "startOffset": 4506, "endOffset": 4535, "count": 1 }],
+          "isBlockCoverage": true
+        }
+      ]
+    },
+    {
+      "scriptId": "1294",
+      "url": "file:///home/hayden/code/hayden/seal/packages/react/src/hooks.ts",
+      "functions": [
+        {
+          "functionName": "",
+          "ranges": [{ "startOffset": 0, "endOffset": 8551, "count": 1 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "",
+          "ranges": [{ "startOffset": 13, "endOffset": 8551, "count": 1 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "get",
+          "ranges": [{ "startOffset": 835, "endOffset": 866, "count": 2 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "useActionContext",
+          "ranges": [{ "startOffset": 895, "endOffset": 960, "count": 0 }],
+          "isBlockCoverage": false
+        },
+        {
+          "functionName": "get",
+          "ranges": [{ "startOffset": 1066, "endOffset": 1098, "count": 0 }],
+          "isBlockCoverage": false
+        },
+        {
+          "functionName": "get",
+          "ranges": [{ "startOffset": 1306, "endOffset": 1334, "count": 0 }],
+          "isBlockCoverage": false
+        },
+        {
+          "functionName": "useMetaContext",
+          "ranges": [{ "startOffset": 1361, "endOffset": 1426, "count": 0 }],
+          "isBlockCoverage": false
+        },
+        {
+          "functionName": "get",
+          "ranges": [{ "startOffset": 1530, "endOffset": 1560, "count": 0 }],
+          "isBlockCoverage": false
+        },
+        {
+          "functionName": "useSealAction",
+          "ranges": [{ "startOffset": 1564, "endOffset": 2707, "count": 0 }],
+          "isBlockCoverage": false
+        },
+        {
+          "functionName": "get",
+          "ranges": [{ "startOffset": 2809, "endOffset": 2838, "count": 0 }],
+          "isBlockCoverage": false
+        },
+        {
+          "functionName": "useLatest",
+          "ranges": [{ "startOffset": 2842, "endOffset": 2953, "count": 2 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "get",
+          "ranges": [{ "startOffset": 3051, "endOffset": 3076, "count": 2 }],
+          "isBlockCoverage": true
+        }
+      ]
+    },
+    {
+      "scriptId": "1295",
+      "url": "file:///home/hayden/code/hayden/seal/packages/react/src/__tests__/testUtils.tsx",
+      "functions": [
+        {
+          "functionName": "",
+          "ranges": [{ "startOffset": 0, "endOffset": 5320, "count": 1 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "",
+          "ranges": [{ "startOffset": 13, "endOffset": 5320, "count": 1 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "customerRender",
+          "ranges": [{ "startOffset": 793, "endOffset": 901, "count": 1 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "get",
+          "ranges": [{ "startOffset": 998, "endOffset": 1028, "count": 1 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "Button",
+          "ranges": [{ "startOffset": 1047, "endOffset": 1298, "count": 0 }],
+          "isBlockCoverage": false
+        },
+        {
+          "functionName": "Paragraph",
+          "ranges": [{ "startOffset": 1318, "endOffset": 1654, "count": 0 }],
+          "isBlockCoverage": false
+        },
+        {
+          "functionName": "get",
+          "ranges": [{ "startOffset": 1801, "endOffset": 1827, "count": 1 }],
+          "isBlockCoverage": true
+        },
+        {
+          "functionName": "get",
+          "ranges": [{ "startOffset": 1925, "endOffset": 1969, "count": 0 }],
+          "isBlockCoverage": false
+        }
+      ]
+    }
+  ]
+}
